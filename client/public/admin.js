@@ -1,59 +1,57 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Fetch and display data
-    fetchContacts();
-    fetchSubscribers();
+async function addProject(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
 
-    // Add Project Form
-    document.getElementById('add-project-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData.entries());
-
-        try {
-            const res = await fetch('/api/projects', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-            if (res.ok) {
-                alert('Project added successfully');
-                e.target.reset();
-            } else {
-                alert('Failed to add project');
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    });
-
-    // Add Client Form
-    document.getElementById('add-client-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData.entries());
-
-        try {
-            const res = await fetch('/api/clients', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-            if (res.ok) {
-                alert('Client added successfully');
-                e.target.reset();
-            } else {
-                alert('Failed to add client');
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    });
-});
-
-async function fetchContacts() {
-    const list = document.getElementById('contacts-list');
     try {
-        const res = await fetch('/api/leads');
+        const res = await fetch('/api/projects', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        if (res.ok) {
+            alert('Project added successfully');
+            event.target.reset();
+        } else {
+            const error = await res.json();
+            alert('Failed to add project: ' + (error.message || 'Unknown error'));
+        }
+    } catch (err) {
+        console.error('Error adding project:', err);
+        alert('Error adding project. Please try again.');
+    }
+}
+
+async function addClient(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+        const res = await fetch('/api/clients', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        if (res.ok) {
+            alert('Client added successfully');
+            event.target.reset();
+        } else {
+            const error = await res.json();
+            alert('Failed to add client: ' + (error.message || 'Unknown error'));
+        }
+    } catch (err) {
+        console.error('Error adding client:', err);
+        alert('Error adding client. Please try again.');
+    }
+}
+
+async function fetchAndDisplayContacts() {
+    const list = document.getElementById('contacts-list');
+    if (!list) return;
+    
+    try {
+        const res = await fetch('/api/contacts');
         const data = await res.json();
         list.innerHTML = data.map(contact => `
             <div class="p-4 border-b">
@@ -63,24 +61,45 @@ async function fetchContacts() {
                 <p><strong>City:</strong> ${contact.city}</p>
                 <p class="text-xs text-gray-400">${new Date(contact.createdAt).toLocaleString()}</p>
             </div>
-        `).join('') || '<p class="text-gray-500">No submissions found.</p>';
+        `).join('') || '<p class="text-gray-500 text-center py-4">No submissions found.</p>';
     } catch (err) {
-        list.innerHTML = '<p class="text-red-500">Error loading contacts.</p>';
+        console.error('Error loading contacts:', err);
+        list.innerHTML = '<p class="text-red-500 text-center py-4">Error loading contacts.</p>';
     }
 }
 
-async function fetchSubscribers() {
+async function fetchAndDisplaySubscribers() {
     const list = document.getElementById('subscribers-list');
+    if (!list) return;
+
     try {
-        const res = await fetch('/api/subscriptions');
+        const res = await fetch('/api/subscribers');
         const data = await res.json();
         list.innerHTML = data.map(sub => `
             <div class="p-2 border-b">
                 <p>${sub.email}</p>
                 <p class="text-xs text-gray-400">${new Date(sub.createdAt).toLocaleString()}</p>
             </div>
-        `).join('') || '<p class="text-gray-500">No subscribers found.</p>';
+        `).join('') || '<p class="text-gray-500 text-center py-4">No subscribers found.</p>';
     } catch (err) {
-        list.innerHTML = '<p class="text-red-500">Error loading subscribers.</p>';
+        console.error('Error loading subscribers:', err);
+        list.innerHTML = '<p class="text-red-500 text-center py-4">Error loading subscribers.</p>';
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Initial data fetch
+    fetchAndDisplayContacts();
+    fetchAndDisplaySubscribers();
+
+    // Form Event Listeners
+    const projectForm = document.getElementById('add-project-form');
+    if (projectForm) {
+        projectForm.addEventListener('submit', addProject);
+    }
+
+    const clientForm = document.getElementById('add-client-form');
+    if (clientForm) {
+        clientForm.addEventListener('submit', addClient);
+    }
+});

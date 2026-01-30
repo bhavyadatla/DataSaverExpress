@@ -66,6 +66,10 @@ export async function registerRoutes(
   });
 
   // Contacts (for lead generation form)
+  app.get("/api/contacts", async (_req, res) => {
+    const data = await storage.getLeads();
+    res.json(data);
+  });
   app.post("/api/contacts", async (req, res) => {
     try {
       const input = api.leads.create.input.parse(req.body);
@@ -94,6 +98,10 @@ export async function registerRoutes(
   });
 
   // Subscribers (plain API for script.js)
+  app.get("/api/subscribers", async (_req, res) => {
+    const data = await storage.getSubscriptions();
+    res.json(data);
+  });
   app.post("/api/subscribers", async (req, res) => {
     try {
       const input = api.subscriptions.create.input.parse(req.body);
