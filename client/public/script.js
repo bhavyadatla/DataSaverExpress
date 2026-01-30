@@ -33,8 +33,37 @@ async function fetchAndRenderProjects() {
   }
 }
 
+async function fetchAndRenderClients() {
+  const container = document.querySelector('#clients-container');
+  if (!container) return;
+
+  try {
+    const response = await fetch('/api/clients');
+    if (!response.ok) throw new Error('Failed to fetch clients');
+    
+    const clients = await response.json();
+
+    clients.forEach(client => {
+      const card = document.createElement('div');
+      card.className = 'border-none shadow-xl rounded-[40px] p-8 text-center bg-white';
+      card.innerHTML = `
+        <div class="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden border-4 border-gray-50 shadow-lg">
+          <img src="${client.imageUrl}" class="w-full h-full object-cover" alt="${client.name}">
+        </div>
+        <p class="italic text-[#4A4A4A] mb-8 font-medium">"${client.description}"</p>
+        <h4 class="text-xl font-black text-[#1A1A1A]">${client.name}</h4>
+        <p class="text-primary font-bold text-sm uppercase tracking-widest">${client.designation}</p>
+      `;
+      container.appendChild(card);
+    });
+  } catch (error) {
+    console.error('Error fetching clients:', error);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   fetchAndRenderProjects();
+  fetchAndRenderClients();
 });
 
 document.addEventListener('submit', async (e) => {

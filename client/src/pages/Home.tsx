@@ -173,7 +173,7 @@ export default function Home() {
       <section id="clients" className="py-32 bg-[#F8F9FF]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl lg:text-5xl font-black mb-20 text-[#1A1A1A]">Happy Clients</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div id="clients-container" className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
             {clients.map((c) => (
               <Card key={c.id} className="border-none shadow-xl rounded-[40px] p-8 text-center bg-white">
                 <div className="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden border-4 border-gray-50 shadow-lg">
