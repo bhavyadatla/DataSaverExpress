@@ -65,6 +65,17 @@ export async function registerRoutes(
     }
   });
 
+  // Contacts (for lead generation form)
+  app.post("/api/contacts", async (req, res) => {
+    try {
+      // Re-using lead creation logic or a generic handler
+      const data = await storage.createLead(req.body);
+      res.status(201).json(data);
+    } catch (err) {
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  });
+
   // Subscriptions
   app.get(api.subscriptions.list.path, async (_req, res) => {
     const data = await storage.getSubscriptions();
