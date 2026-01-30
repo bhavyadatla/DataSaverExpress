@@ -27,7 +27,17 @@ async function build() {
     fs.mkdirSync("dist/public", { recursive: true });
     
     // Copy public directory to dist/public
-    execSync("cp -r public/* dist/public/", { stdio: "inherit" });
+    if (fs.existsSync("public")) {
+      execSync("cp -r public/* dist/public/", { stdio: "inherit" });
+    }
+
+    // Copy data files to dist if they exist, to ensure they are available in production
+    const dataFiles = ["projects.json", "clients.json", "contacts.json", "subscribers.json"];
+    dataFiles.forEach(file => {
+      if (fs.existsSync(file)) {
+        fs.copyFileSync(file, path.join("dist", file));
+      }
+    });
 
     console.log("Build completed successfully!");
   } catch (error) {

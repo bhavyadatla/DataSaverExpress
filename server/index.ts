@@ -14,12 +14,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Serve static files from "public"
-app.use(express.static("public"));
+const staticPath = process.env.NODE_ENV === "production"
+  ? path.resolve(__dirname, "public")
+  : path.resolve("public");
+app.use(express.static(staticPath));
 
-const PROJECTS_FILE = path.resolve("projects.json");
-const CLIENTS_FILE = path.resolve("clients.json");
-const CONTACTS_FILE = path.resolve("contacts.json");
-const SUBSCRIBERS_FILE = path.resolve("subscribers.json");
+// Helper to get correct file paths based on environment
+const getFilePath = (filename: string) => {
+  return process.env.NODE_ENV === "production"
+    ? path.join(__dirname, filename)
+    : path.resolve(filename);
+};
+
+const PROJECTS_FILE = getFilePath("projects.json");
+const CLIENTS_FILE = getFilePath("clients.json");
+const CONTACTS_FILE = getFilePath("contacts.json");
+const SUBSCRIBERS_FILE = getFilePath("subscribers.json");
 
 async function readJson(file) {
   try {
@@ -134,9 +144,18 @@ app.post("/api/subscribers", async (req, res) => {
   res.status(201).json(newItem);
 });
 
-// Fallback to index.html for unknown routes
+// Fallback for unknown routes
 app.get(/^((?!\/api).)*$/, (req, res) => {
-  res.sendFile(path.resolve("public", "index.html"));
+  const publicPath = process.env.NODE_ENV === "production" 
+    ? path.resolve(__dirname, "public")
+    : path.resolve("public");
+  
+  // Serve requested file or index.html as fallback
+  const requestedPath = path.join(publicPath, req.path === '/' ? 'index.html' : req.path);
+  
+  fs.access(requestedPath)
+    .then(() => res.sendFile(requestedPath))
+    .catch(() => res.sendFile(path.join(publicPath, "index.html")));
 });
 
 const port = process.env.PORT || 5000;
