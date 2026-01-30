@@ -1,14 +1,38 @@
 [
   {
-    "id": 1769752163829,
-    "name": "SPA",
-    "imageUrl": "https://drive.google.com/file/d/15KdJAcBnbqB3iDTdIylDrN0n7uv8JaFU/view?usp=sharing",
-    "description": "Spa"
+    "id": 1,
+    "name": "Luxury Garden Villa",
+    "imageUrl": "/assets/images/pexels-brett-sayles-2881232.svg",
+    "description": "A stunning 5-bedroom villa with landscaped gardens, infinity pool, and panoramic mountain views. Features smart home technology and premium finishes throughout."
   },
   {
-    "id": 1769752534971,
-    "name": "SPA",
-    "imageUrl": "https://euronewsweek.co.uk/wp-content/uploads/2021/05/Pros-and-cons-of-using-free-images-online-Euronewsweek-Marcio-Delgado-scaled.jpg",
-    "description": "STUDENT PERFORMANCE ANALYSIS "
+    "id": 2,
+    "name": "Modern City Apartment",
+    "imageUrl": "/assets/images/pexels-brett-sayles-2881232-1.svg",
+    "description": "Contemporary 3-bedroom apartment in the heart of downtown. Floor-to-ceiling windows, open-plan living, and access to rooftop terrace with city views."
+  },
+  {
+    "id": 3,
+    "name": "Seaside Beach House",
+    "imageUrl": "/assets/images/pexels-brett-sayles-2881232-2.svg",
+    "description": "Beautiful beachfront property with 4 bedrooms, private beach access, and stunning ocean views. Perfect for those seeking a coastal lifestyle."
+  },
+  {
+    "id": 4,
+    "name": "Executive Penthouse Suite",
+    "imageUrl": "/assets/images/pexels-brett-sayles-2881232-3.svg",
+    "description": "Luxurious penthouse with 360-degree city views, private elevator, chef's kitchen, and expansive terrace. The epitome of urban sophistication."
+  },
+  {
+    "id": 5,
+    "name": "Family Estate Home",
+    "imageUrl": "/assets/images/pexels-andres-ayrton-6578391.svg",
+    "description": "Spacious 6-bedroom estate on 2 acres of manicured grounds. Features home theater, wine cellar, and resort-style outdoor entertaining area."
+  },
+  {
+    "id": 6,
+    "name": "Corporate Office Complex",
+    "imageUrl": "/assets/images/pexels-fauxels-3182834.svg",
+    "description": "Premium commercial space with modern amenities, conference facilities, and flexible floor plans. Ideal for growing businesses seeking prestige."
   }
 ]

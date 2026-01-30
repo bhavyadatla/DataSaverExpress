@@ -1,1 +1,44 @@
-[]
+[
+  {
+    "id": 1,
+    "name": "Sarah Johnson",
+    "designation": "Business Executive",
+    "imageUrl": "/assets/images/Ellipse-11.svg",
+    "description": "Working with RealEstatePro was an absolute pleasure. They found us our dream home in just two weeks. The team's professionalism and attention to detail exceeded all expectations."
+  },
+  {
+    "id": 2,
+    "name": "Michael Chen",
+    "designation": "Tech Entrepreneur",
+    "imageUrl": "/assets/images/Ellipse-12.svg",
+    "description": "I've bought and sold several properties through RealEstatePro. Their market knowledge and negotiation skills are unmatched. Highly recommend for anyone serious about real estate."
+  },
+  {
+    "id": 3,
+    "name": "Emily Rodriguez",
+    "designation": "Interior Designer",
+    "imageUrl": "/assets/images/Ellipse-13.svg",
+    "description": "As a designer, I have high standards. RealEstatePro understood my vision perfectly and showed me properties that matched my aesthetic. Found my perfect studio apartment!"
+  },
+  {
+    "id": 4,
+    "name": "David Thompson",
+    "designation": "Investment Banker",
+    "imageUrl": "/assets/images/Ellipse-28.svg",
+    "description": "The investment properties RealEstatePro recommended have given me excellent returns. Their market analysis is thorough and their advice is always on point."
+  },
+  {
+    "id": 5,
+    "name": "Lisa Williams",
+    "designation": "Medical Doctor",
+    "imageUrl": "/assets/images/Ellipse-29.svg",
+    "description": "Moving to a new city for work was stressful, but RealEstatePro made finding a home so easy. They handled everything remotely and I moved into a beautiful condo."
+  },
+  {
+    "id": 6,
+    "name": "Robert Martinez",
+    "designation": "Restaurant Owner",
+    "imageUrl": "/assets/images/Ellipse-31.svg",
+    "description": "RealEstatePro helped me find the perfect commercial space for my new restaurant. Their understanding of business needs and location analysis was exceptional."
+  }
+]
