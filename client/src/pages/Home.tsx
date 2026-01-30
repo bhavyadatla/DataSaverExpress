@@ -154,7 +154,7 @@ export default function Home() {
             <h2 className="text-4xl lg:text-5xl font-black mb-6 text-[#1A1A1A]">Our Projects</h2>
             <p className="text-lg text-[#4A4A4A] font-medium leading-relaxed">Explore our latest high-quality developments across the city.</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div id="projects-container" className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
             {projects.map((p) => (
               <Card key={p.id} className="border-none shadow-2xl overflow-hidden rounded-[40px] group hover:-translate-y-2 transition-all duration-500">
                 <div className="h-64 overflow-hidden"><img src={p.imageUrl} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={p.name} /></div>
