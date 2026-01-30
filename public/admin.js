@@ -371,9 +371,9 @@ function showToast(message, type = 'info') {
     const toast = document.createElement('div');
     toast.className = 'toast-notification';
     
-    const bgColor = type === 'success' ? 'linear-gradient(135deg, #059669 0%, #10b981 100%)' : 
-                    type === 'error' ? 'linear-gradient(135deg, #dc2626 0%, #ef4444 100%)' : 
-                    'linear-gradient(135deg, #1a1a1a 0%, #333 100%)';
+    const bgColor = type === 'success' ? '#10b981' : 
+                    type === 'error' ? '#ef4444' : 
+                    '#0f172a';
     
     toast.style.cssText = `
         position: fixed;
@@ -381,20 +381,22 @@ function showToast(message, type = 'info') {
         right: 24px;
         background: ${bgColor};
         color: white;
-        padding: 1rem 1.5rem;
-        border-radius: 12px;
-        font-weight: 600;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        padding: 0.75rem 1.25rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
         z-index: 1000;
         animation: slideIn 0.3s ease;
+        font-size: 0.875rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     `;
     
     toast.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 10px;">
-            ${type === 'success' ? '<svg style="width:20px;height:20px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>' : 
-              type === 'error' ? '<svg style="width:20px;height:20px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>' : ''}
-            <span>${message}</span>
-        </div>
+        ${type === 'success' ? '<svg style="width:18px;height:18px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>' : 
+          type === 'error' ? '<svg style="width:18px;height:18px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>' : ''}
+        <span>${message}</span>
     `;
     
     document.body.appendChild(toast);
