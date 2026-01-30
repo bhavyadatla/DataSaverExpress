@@ -247,7 +247,7 @@ export default function Home() {
         <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3"><img src="/images/logo.svg" className="h-8" alt="" /><span className="font-display font-bold text-2xl tracking-tight">RealEstatePro</span></div>
           <p className="text-sm font-bold text-gray-400">© 2024 RealEstatePro. All rights reserved.</p>
-          <div className="flex gap-4"><a href="/admin" className="text-sm font-bold text-gray-400 hover:text-primary">Admin Access</a></div>
+          <div className="flex gap-4"><a href="/admin.html" className="text-sm font-bold text-gray-400 hover:text-primary">Admin Access</a></div>
         </div>
       </footer>
     </div>
