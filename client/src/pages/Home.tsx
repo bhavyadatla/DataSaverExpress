@@ -15,9 +15,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { 
-  Rocket, 
-  BarChart3, 
-  Globe2, 
   Menu, 
   X,
   CheckCircle2,
@@ -52,22 +49,24 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col relative overflow-hidden bg-[#FAFAFA]">
+      {/* Background Shapes */}
+      <img src="/shapes/Ellipse 1.svg" className="absolute top-0 right-0 -z-10 opacity-50" alt="" />
+      <img src="/shapes/Subtract.svg" className="absolute bottom-0 left-0 -z-10 opacity-30" alt="" />
+      
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <nav className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground">
-              <Rocket className="w-5 h-5" />
-            </div>
-            <span className="font-display font-bold text-xl tracking-tight">GrowthFlow</span>
+            <img src="/images/logo.svg" alt="Logo" className="h-8 w-auto" />
+            <span className="font-display font-bold text-2xl tracking-tight text-[#1A1A1A]">RealEstatePro</span>
           </div>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
-            <button onClick={() => scrollToSection('features')} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Features</button>
-            <button onClick={() => scrollToSection('about')} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">About</button>
-            <Button onClick={() => scrollToSection('contact')} variant="default" size="sm" className="font-semibold">
+          <div className="hidden md:flex items-center gap-10">
+            <button onClick={() => scrollToSection('features')} className="text-sm font-semibold text-[#4A4A4A] hover:text-primary transition-colors">Features</button>
+            <button onClick={() => scrollToSection('about')} className="text-sm font-semibold text-[#4A4A4A] hover:text-primary transition-colors">About</button>
+            <Button onClick={() => scrollToSection('contact')} variant="default" size="lg" className="font-bold rounded-xl px-8 bg-[#1A1A1A] hover:bg-[#333]">
               Get Started
             </Button>
           </div>
@@ -80,158 +79,187 @@ export default function Home() {
 
         {/* Mobile Nav */}
         {isMenuOpen && (
-          <div className="md:hidden border-t bg-background p-4 space-y-4 shadow-lg absolute w-full">
-            <button onClick={() => scrollToSection('features')} className="block w-full text-left py-2 text-sm font-medium">Features</button>
-            <button onClick={() => scrollToSection('about')} className="block w-full text-left py-2 text-sm font-medium">About</button>
-            <Button onClick={() => scrollToSection('contact')} className="w-full">Get Started</Button>
+          <div className="md:hidden border-t bg-white p-6 space-y-6 shadow-2xl absolute w-full left-0">
+            <button onClick={() => scrollToSection('features')} className="block w-full text-left py-2 text-lg font-semibold">Features</button>
+            <button onClick={() => scrollToSection('about')} className="block w-full text-left py-2 text-lg font-semibold">About</button>
+            <Button onClick={() => scrollToSection('contact')} className="w-full py-6 text-lg rounded-xl bg-[#1A1A1A]">Get Started</Button>
           </div>
         )}
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-20 pb-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 pointer-events-none" />
-        
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-              </span>
-              Now Available in Beta
-            </div>
-            
-            <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight leading-tight">
-              Grow Your Business <br />
-              <span className="text-gradient">Faster Than Ever</span>
-            </h1>
-            
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-              Unlock powerful analytics, automation, and scaling tools designed to take your enterprise to the next level without the complexity.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button onClick={() => scrollToSection('contact')} size="lg" className="h-14 px-8 text-lg rounded-full shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all hover:-translate-y-0.5">
-                Start Free Trial <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-              <Button onClick={() => scrollToSection('features')} variant="outline" size="lg" className="h-14 px-8 text-lg rounded-full">
-                Learn More
-              </Button>
-            </div>
-          </motion.div>
+      <section className="relative pt-16 pb-24 lg:pt-24 lg:pb-32">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            <motion.div
+              className="lg:w-1/2 text-left"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="text-5xl lg:text-7xl font-black mb-8 tracking-tight leading-[1.1] text-[#1A1A1A]">
+                Find Your <span className="text-primary italic">Dream Home</span> With Expert Guidance
+              </h1>
+              
+              <p className="text-xl text-[#4A4A4A] max-w-xl mb-12 leading-relaxed font-medium">
+                Our team of dedicated professionals helps you navigate the complex real estate market with confidence and ease.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row items-center gap-5">
+                <Button onClick={() => scrollToSection('contact')} size="lg" className="h-16 px-10 text-lg font-bold rounded-2xl bg-[#1A1A1A] hover:bg-[#333] shadow-xl transition-all hover:scale-105">
+                  Book a Consultation <ArrowRight className="ml-3 w-6 h-6" />
+                </Button>
+                <div className="flex items-center gap-3 px-6 py-4 bg-white rounded-2xl border border-gray-100 shadow-sm">
+                  <div className="flex -space-x-3">
+                    {[1,2,3].map(i => (
+                      <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
+                        <img src={`/images/Ellipse ${27+i}.svg`} alt="" className="w-full h-full object-cover" />
+                      </div>
+                    ))}
+                  </div>
+                  <span className="text-sm font-bold text-[#1A1A1A]">1,200+ Happy Clients</span>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="lg:w-1/2 relative"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="relative z-10 rounded-[40px] overflow-hidden shadow-2xl border-8 border-white">
+                <img 
+                  src="/images/young-couple-examining-blueprints-with-real-estate-agent-while-buying-new-home 1.svg" 
+                  alt="Real Estate consultation" 
+                  className="w-full h-auto"
+                />
+              </div>
+              <img src="/shapes/Subtract-1.svg" className="absolute -bottom-10 -right-10 -z-10 w-48" alt="" />
+              <div className="absolute top-10 -left-10 bg-white p-6 rounded-3xl shadow-2xl border border-gray-50 flex items-center gap-4 z-20">
+                <img src="/icons/home.svg" alt="" className="w-12 h-12" />
+                <div>
+                  <div className="text-2xl font-black text-[#1A1A1A]">500+</div>
+                  <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">Properties Sold</div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-24 bg-secondary/50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold mb-4">Everything you need to scale</h2>
-            <p className="text-muted-foreground text-lg">Powerful features wrapped in a simple, intuitive interface that your team will actually want to use.</p>
+      <section id="features" className="py-32 bg-white relative">
+        <img src="/shapes/Ellipse 10.svg" className="absolute top-0 left-0 opacity-20" alt="" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <h2 className="text-4xl lg:text-5xl font-black mb-6 text-[#1A1A1A]">Our Premium Services</h2>
+            <p className="text-lg text-[#4A4A4A] font-medium leading-relaxed">We provide end-to-end solutions for all your real estate needs, from property search to final closing.</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-10">
             <FeatureCard 
-              icon={<BarChart3 className="w-10 h-10 text-primary" />}
-              title="Advanced Analytics"
-              description="Get deep insights into your business performance with real-time data visualization and custom reporting."
+              icon="/icons/home.svg"
+              title="Property Search"
+              description="Access exclusive listings and off-market properties tailored to your specific criteria."
+              delay={0}
             />
             <FeatureCard 
-              icon={<Globe2 className="w-10 h-10 text-accent" />}
-              title="Global Scale"
-              description="Deploy your infrastructure worldwide with a single click. Low latency, high availability guaranteed."
+              icon="/icons/circle-dollar-sign.svg"
+              title="Financial Advice"
+              description="Our experts help you secure the best mortgage rates and structure your investment wisely."
+              delay={0.2}
             />
             <FeatureCard 
-              icon={<CheckCircle2 className="w-10 h-10 text-indigo-500" />}
-              title="Smart Automation"
-              description="Automate repetitive tasks and workflows so your team can focus on what really matters—growth."
+              icon="/icons/paintbrush-2.svg"
+              title="Interior Design"
+              description="Transform your new space with our professional interior design consultation services."
+              delay={0.4}
             />
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24">
+      <section id="about" className="py-32 bg-[#F8F9FF]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
-            <div className="lg:w-1/2">
-              <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-primary to-accent rounded-2xl opacity-20 blur-2xl"></div>
-                {/* stock photo: modern office team meeting collaboration */}
-                <img 
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" 
-                  alt="Team collaborating" 
-                  className="relative rounded-2xl shadow-2xl w-full border border-border"
-                />
+          <div className="flex flex-col lg:flex-row items-center gap-20">
+            <div className="lg:w-1/2 relative order-2 lg:order-1">
+              <div className="grid grid-cols-2 gap-4">
+                <img src="/images/pexels-brett-sayles-2881232.svg" className="rounded-3xl shadow-lg mt-12" alt="" />
+                <img src="/images/pexels-andres-ayrton-6578391.svg" className="rounded-3xl shadow-lg" alt="" />
               </div>
+              <img src="/shapes/Rectangle 54.svg" className="absolute -z-10 -top-10 -left-10 w-64" alt="" />
             </div>
-            <div className="lg:w-1/2">
-              <h2 className="text-4xl font-bold mb-6">Built for ambitious teams</h2>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                We started GrowthFlow because we were tired of complex, clunky enterprise software. We believe that powerful tools should feel simple and intuitive.
+            <div className="lg:w-1/2 order-1 lg:order-2">
+              <h2 className="text-4xl font-black mb-8 text-[#1A1A1A]">Why Choose RealEstatePro?</h2>
+              <p className="text-xl text-[#4A4A4A] mb-10 leading-relaxed font-medium">
+                With over a decade of experience, we have built a reputation for integrity, transparency, and results. We don't just sell houses; we build futures.
               </p>
-              <ul className="space-y-4">
+              <div className="space-y-6">
                 {[
-                  "Enterprise-grade security by default",
-                  "24/7 dedicated support team",
-                  "99.99% uptime SLA guarantee",
-                  "Seamless integration with your stack"
+                  "Licensed professionals with deep market knowledge",
+                  "Personalized attention to every client's needs",
+                  "Proven track record of successful negotiations",
+                  "Comprehensive post-purchase support"
                 ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                      <CheckCircle2 className="w-4 h-4" />
-                    </div>
-                    <span className="font-medium">{item}</span>
-                  </li>
+                  <div key={i} className="flex items-center gap-5 p-4 bg-white rounded-2xl shadow-sm border border-gray-100">
+                    <img src="/icons/home.svg" className="w-8 h-8" alt="" />
+                    <span className="font-bold text-[#1A1A1A]">{item}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 bg-primary/5">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-xl mx-auto">
-            <Card className="shadow-xl border-border/50">
-              <CardHeader className="text-center space-y-2 pb-8">
-                <CardTitle className="text-3xl">Get in touch</CardTitle>
-                <CardDescription className="text-lg">
-                  Ready to start? Fill out the form below and we'll get back to you within 24 hours.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
+      <section id="contact" className="py-32 relative">
+        <img src="/shapes/Subtract-2.svg" className="absolute top-20 right-0 w-32" alt="" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-6xl mx-auto bg-[#1A1A1A] rounded-[60px] p-8 lg:p-20 shadow-2xl relative overflow-hidden">
+            <img src="/shapes/Ellipse 19.svg" className="absolute top-0 right-0 opacity-10" alt="" />
+            
+            <div className="flex flex-col lg:flex-row gap-20">
+              <div className="lg:w-2/5 text-white">
+                <h2 className="text-4xl font-black mb-8">Ready to Take the Next Step?</h2>
+                <p className="text-lg text-gray-400 mb-12 font-medium">Fill out the form and our team will reach out to you within one business day for a free consultation.</p>
+                
+                <div className="space-y-8">
+                  <div className="flex items-center gap-6">
+                    <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center">
+                      <img src="/icons/home.svg" className="w-7 h-7 invert" alt="" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Address</div>
+                      <div className="text-lg font-bold">123 Reality St, Suite 100, NY</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-6">
+                    <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center">
+                      <img src="/icons/Linkedin.svg" className="w-7 h-7" alt="" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Connect</div>
+                      <div className="text-lg font-bold">@RealEstatePro_Official</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="lg:w-3/5 bg-white rounded-[40px] p-8 lg:p-12 shadow-2xl">
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Full Name</FormLabel>
-                          <FormControl>
-                            <Input placeholder="John Doe" className="h-11" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <FormField
                         control={form.control}
-                        name="email"
+                        name="name"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Email</FormLabel>
+                            <FormLabel className="font-bold text-[#1A1A1A]">Full Name</FormLabel>
                             <FormControl>
-                              <Input placeholder="john@company.com" className="h-11" {...field} />
+                              <Input placeholder="John Doe" className="h-14 rounded-2xl bg-gray-50 border-none focus-visible:ring-2 focus-visible:ring-primary" {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -239,29 +267,43 @@ export default function Home() {
                       />
                       <FormField
                         control={form.control}
-                        name="phone"
+                        name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Phone (Optional)</FormLabel>
+                            <FormLabel className="font-bold text-[#1A1A1A]">Email Address</FormLabel>
                             <FormControl>
-                              <Input placeholder="+1 (555) 000-0000" className="h-11" {...field} />
+                              <Input placeholder="john@example.com" className="h-14 rounded-2xl bg-gray-50 border-none focus-visible:ring-2 focus-visible:ring-primary" {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
                       />
                     </div>
+                    
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="font-bold text-[#1A1A1A]">Phone Number</FormLabel>
+                          <FormControl>
+                            <Input placeholder="+1 (555) 000-0000" className="h-14 rounded-2xl bg-gray-50 border-none focus-visible:ring-2 focus-visible:ring-primary" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
                     <FormField
                       control={form.control}
                       name="message"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Message</FormLabel>
+                          <FormLabel className="font-bold text-[#1A1A1A]">Your Message</FormLabel>
                           <FormControl>
                             <Textarea 
-                              placeholder="Tell us about your project needs..." 
-                              className="min-h-[120px] resize-none" 
+                              placeholder="Tell us about what you're looking for..." 
+                              className="min-h-[150px] rounded-2xl bg-gray-50 border-none focus-visible:ring-2 focus-visible:ring-primary resize-none" 
                               {...field} 
                             />
                           </FormControl>
@@ -272,40 +314,65 @@ export default function Home() {
 
                     <Button 
                       type="submit" 
-                      className="w-full h-12 text-lg font-semibold shadow-lg shadow-primary/20"
+                      className="w-full h-16 text-lg font-bold rounded-2xl bg-[#1A1A1A] hover:bg-[#333] transition-all"
                       disabled={createLead.isPending}
                     >
-                      {createLead.isPending ? "Sending..." : "Send Message"}
+                      {createLead.isPending ? "Sending..." : "Request Call Back"}
                     </Button>
                   </form>
                 </Form>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-foreground text-background py-12">
+      <footer className="bg-white py-20 border-t">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground">
-                <Rocket className="w-5 h-5" />
+          <div className="flex flex-col md:flex-row justify-between items-start gap-12">
+            <div className="max-w-sm">
+              <div className="flex items-center gap-3 mb-6">
+                <img src="/images/logo.svg" alt="Logo" className="h-8" />
+                <span className="font-display font-bold text-2xl tracking-tight">RealEstatePro</span>
               </div>
-              <span className="font-display font-bold text-xl tracking-tight">GrowthFlow</span>
+              <p className="text-[#4A4A4A] font-medium leading-relaxed">
+                Elevating the real estate experience through expertise, technology, and personalized service.
+              </p>
             </div>
             
-            <div className="flex gap-8 text-sm text-muted-foreground">
-              <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-primary transition-colors">Twitter</a>
-              <a href="#" className="hover:text-primary transition-colors">LinkedIn</a>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-16">
+              <div>
+                <h4 className="font-black text-[#1A1A1A] mb-6 uppercase tracking-widest text-xs">Quick Links</h4>
+                <div className="flex flex-col gap-4 text-sm font-bold text-gray-500">
+                  <button onClick={() => scrollToSection('features')} className="hover:text-primary transition-colors text-left">Features</button>
+                  <button onClick={() => scrollToSection('about')} className="hover:text-primary transition-colors text-left">About Us</button>
+                  <button onClick={() => scrollToSection('contact')} className="hover:text-primary transition-colors text-left">Contact</button>
+                </div>
+              </div>
+              <div>
+                <h4 className="font-black text-[#1A1A1A] mb-6 uppercase tracking-widest text-xs">Support</h4>
+                <div className="flex flex-col gap-4 text-sm font-bold text-gray-500">
+                  <a href="#" className="hover:text-primary transition-colors">Help Center</a>
+                  <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
+                  <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
+                </div>
+              </div>
             </div>
-            
-            <p className="text-sm text-muted-foreground">
-              © 2024 GrowthFlow Inc. All rights reserved.
+          </div>
+          
+          <div className="mt-20 pt-8 border-t flex flex-col sm:flex-row justify-between items-center gap-6">
+            <p className="text-sm font-bold text-gray-400">
+              © 2024 RealEstatePro. All rights reserved.
             </p>
+            <div className="flex gap-6">
+              <a href="#" className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center hover:bg-gray-100 transition-colors">
+                <img src="/icons/Linkedin.svg" className="w-5 h-5" alt="" />
+              </a>
+              <a href="#" className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center hover:bg-gray-100 transition-colors">
+                <img src="/icons/Frame.svg" className="w-5 h-5" alt="" />
+              </a>
+            </div>
           </div>
         </div>
       </footer>
@@ -313,16 +380,23 @@ export default function Home() {
   );
 }
 
-function FeatureCard({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) {
+function FeatureCard({ icon, title, description, delay }: { icon: string, title: string, description: string, delay: number }) {
   return (
-    <Card className="border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-      <CardContent className="pt-8 px-6 pb-8 text-center">
-        <div className="inline-flex p-3 rounded-2xl bg-secondary mb-6 ring-1 ring-border">
-          {icon}
-        </div>
-        <h3 className="text-xl font-bold mb-3">{title}</h3>
-        <p className="text-muted-foreground leading-relaxed">{description}</p>
-      </CardContent>
-    </Card>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay }}
+      viewport={{ once: true }}
+    >
+      <Card className="border-none shadow-2xl hover:shadow-primary/5 transition-all duration-500 p-10 rounded-[40px] bg-white group hover:-translate-y-2">
+        <CardContent className="p-0">
+          <div className="w-20 h-20 rounded-3xl bg-gray-50 flex items-center justify-center mb-8 group-hover:bg-primary/5 transition-colors">
+            <img src={icon} alt="" className="w-10 h-10" />
+          </div>
+          <h3 className="text-2xl font-black mb-4 text-[#1A1A1A]">{title}</h3>
+          <p className="text-[#4A4A4A] leading-relaxed font-medium">{description}</p>
+        </CardContent>
+      </Card>
+    </motion.div>
   );
 }
