@@ -54,17 +54,17 @@ async function fetchAndDisplayContacts() {
         const res = await fetch('/api/contacts');
         const data = await res.json();
         list.innerHTML = data.map(contact => `
-            <div class="p-4 border-b">
+            <div class="list-item">
                 <p><strong>Name:</strong> ${contact.name}</p>
                 <p><strong>Email:</strong> ${contact.email}</p>
                 <p><strong>Phone:</strong> ${contact.phone}</p>
                 <p><strong>City:</strong> ${contact.city}</p>
-                <p class="text-xs text-gray-400">${new Date(contact.createdAt).toLocaleString()}</p>
+                <p class="timestamp">${new Date(contact.createdAt).toLocaleString()}</p>
             </div>
-        `).join('') || '<p class="text-gray-500 text-center py-4">No submissions found.</p>';
+        `).join('') || '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No submissions found.</p>';
     } catch (err) {
         console.error('Error loading contacts:', err);
-        list.innerHTML = '<p class="text-red-500 text-center py-4">Error loading contacts.</p>';
+        list.innerHTML = '<p style="text-align: center; color: var(--error); padding: 2rem;">Error loading contacts.</p>';
     }
 }
 
@@ -76,14 +76,14 @@ async function fetchAndDisplaySubscribers() {
         const res = await fetch('/api/subscribers');
         const data = await res.json();
         list.innerHTML = data.map(sub => `
-            <div class="p-2 border-b">
-                <p>${sub.email}</p>
-                <p class="text-xs text-gray-400">${new Date(sub.createdAt).toLocaleString()}</p>
+            <div class="list-item">
+                <p><strong>Email:</strong> ${sub.email}</p>
+                <p class="timestamp">${new Date(sub.createdAt).toLocaleString()}</p>
             </div>
-        `).join('') || '<p class="text-gray-500 text-center py-4">No subscribers found.</p>';
+        `).join('') || '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No subscribers found.</p>';
     } catch (err) {
         console.error('Error loading subscribers:', err);
-        list.innerHTML = '<p class="text-red-500 text-center py-4">Error loading subscribers.</p>';
+        list.innerHTML = '<p style="text-align: center; color: var(--error); padding: 2rem;">Error loading subscribers.</p>';
     }
 }
 
