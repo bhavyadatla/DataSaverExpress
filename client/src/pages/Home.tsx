@@ -232,7 +232,7 @@ export default function Home() {
           <h2 className="text-4xl font-black mb-6 uppercase tracking-tighter">Subscribe to our newsletter</h2>
           <p className="text-xl mb-12 font-medium opacity-80">Get the latest property updates and market trends directly in your inbox.</p>
           <Form {...subForm}>
-            <form onSubmit={subForm.handleSubmit(onSubSubmit)} className="max-w-xl mx-auto flex flex-col sm:flex-row gap-4">
+            <form id="newsletter-form" onSubmit={subForm.handleSubmit(onSubSubmit)} className="max-w-xl mx-auto flex flex-col sm:flex-row gap-4">
               <FormField control={subForm.control} name="email" render={({ field }) => (
                 <FormItem className="flex-1"><FormControl><Input placeholder="Your email address" className="h-16 rounded-2xl bg-white/10 border-white/20 text-white placeholder:text-white/50" {...field} /></FormControl><FormMessage /></FormItem>
               )} />

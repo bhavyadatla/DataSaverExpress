@@ -93,5 +93,17 @@ export async function registerRoutes(
     }
   });
 
+  // Subscribers (plain API for script.js)
+  app.post("/api/subscribers", async (req, res) => {
+    try {
+      const input = api.subscriptions.create.input.parse(req.body);
+      const data = await storage.createSubscription(input);
+      res.status(201).json(data);
+    } catch (err) {
+      if (err instanceof z.ZodError) return res.status(400).json({ message: err.errors[0].message });
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  });
+
   return httpServer;
 }
