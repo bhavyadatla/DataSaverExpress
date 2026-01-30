@@ -47,6 +47,30 @@ app.post("/api/projects", async (req, res) => {
   res.status(201).json(newItem);
 });
 
+app.put("/api/projects/:id", async (req, res) => {
+  const data = await readJson(PROJECTS_FILE);
+  const id = parseInt(req.params.id);
+  const index = data.findIndex((item: any) => item.id === id);
+  if (index === -1) {
+    return res.status(404).json({ message: "Project not found" });
+  }
+  data[index] = { ...data[index], ...req.body };
+  await writeJson(PROJECTS_FILE, data);
+  res.json(data[index]);
+});
+
+app.delete("/api/projects/:id", async (req, res) => {
+  const data = await readJson(PROJECTS_FILE);
+  const id = parseInt(req.params.id);
+  const index = data.findIndex((item: any) => item.id === id);
+  if (index === -1) {
+    return res.status(404).json({ message: "Project not found" });
+  }
+  data.splice(index, 1);
+  await writeJson(PROJECTS_FILE, data);
+  res.json({ message: "Project deleted" });
+});
+
 app.get("/api/clients", async (req, res) => {
   const data = await readJson(CLIENTS_FILE);
   res.json(data);
@@ -58,6 +82,30 @@ app.post("/api/clients", async (req, res) => {
   data.push(newItem);
   await writeJson(CLIENTS_FILE, data);
   res.status(201).json(newItem);
+});
+
+app.put("/api/clients/:id", async (req, res) => {
+  const data = await readJson(CLIENTS_FILE);
+  const id = parseInt(req.params.id);
+  const index = data.findIndex((item: any) => item.id === id);
+  if (index === -1) {
+    return res.status(404).json({ message: "Client not found" });
+  }
+  data[index] = { ...data[index], ...req.body };
+  await writeJson(CLIENTS_FILE, data);
+  res.json(data[index]);
+});
+
+app.delete("/api/clients/:id", async (req, res) => {
+  const data = await readJson(CLIENTS_FILE);
+  const id = parseInt(req.params.id);
+  const index = data.findIndex((item: any) => item.id === id);
+  if (index === -1) {
+    return res.status(404).json({ message: "Client not found" });
+  }
+  data.splice(index, 1);
+  await writeJson(CLIENTS_FILE, data);
+  res.json({ message: "Client deleted" });
 });
 
 app.get("/api/contacts", async (req, res) => {
