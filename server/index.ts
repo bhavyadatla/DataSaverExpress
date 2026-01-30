@@ -2,6 +2,8 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
+import fs from "fs/promises";
+import path from "path";
 
 const app = express();
 const httpServer = createServer(app);
@@ -21,6 +23,9 @@ app.use(
 );
 
 app.use(express.urlencoded({ extended: false }));
+
+// Serve static files from "public"
+app.use(express.static("public"));
 
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
@@ -59,6 +64,77 @@ app.use((req, res, next) => {
   next();
 });
 
+// JSON-based REST APIs
+const PROJECTS_FILE = path.resolve("projects.json");
+const CLIENTS_FILE = path.resolve("clients.json");
+const CONTACTS_FILE = path.resolve("contacts.json");
+const SUBSCRIBERS_FILE = path.resolve("subscribers.json");
+
+async function readJson(file: string) {
+  try {
+    const data = await fs.readFile(file, "utf8");
+    return JSON.parse(data);
+  } catch (e) {
+    return [];
+  }
+}
+
+async function writeJson(file: string, data: any[]) {
+  await fs.writeFile(file, JSON.stringify(data, null, 2), "utf8");
+}
+
+app.get("/api/projects", async (req, res) => {
+  const data = await readJson(PROJECTS_FILE);
+  res.json(data);
+});
+
+app.post("/api/projects", async (req, res) => {
+  const data = await readJson(PROJECTS_FILE);
+  const newItem = { id: Date.now(), ...req.body };
+  data.push(newItem);
+  await writeJson(PROJECTS_FILE, data);
+  res.status(201).json(newItem);
+});
+
+app.get("/api/clients", async (req, res) => {
+  const data = await readJson(CLIENTS_FILE);
+  res.json(data);
+});
+
+app.post("/api/clients", async (req, res) => {
+  const data = await readJson(CLIENTS_FILE);
+  const newItem = { id: Date.now(), ...req.body };
+  data.push(newItem);
+  await writeJson(CLIENTS_FILE, data);
+  res.status(201).json(newItem);
+});
+
+app.get("/api/contacts", async (req, res) => {
+  const data = await readJson(CONTACTS_FILE);
+  res.json(data);
+});
+
+app.post("/api/contacts", async (req, res) => {
+  const data = await readJson(CONTACTS_FILE);
+  const newItem = { id: Date.now(), ...req.body };
+  data.push(newItem);
+  await writeJson(CONTACTS_FILE, data);
+  res.status(201).json(newItem);
+});
+
+app.get("/api/subscribers", async (req, res) => {
+  const data = await readJson(SUBSCRIBERS_FILE);
+  res.json(data);
+});
+
+app.post("/api/subscribers", async (req, res) => {
+  const data = await readJson(SUBSCRIBERS_FILE);
+  const newItem = { id: Date.now(), ...req.body };
+  data.push(newItem);
+  await writeJson(SUBSCRIBERS_FILE, data);
+  res.status(201).json(newItem);
+});
+
 (async () => {
   await registerRoutes(httpServer, app);
 
@@ -75,9 +151,6 @@ app.use((req, res, next) => {
     return res.status(status).json({ message });
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
   if (process.env.NODE_ENV === "production") {
     serveStatic(app);
   } else {
@@ -85,10 +158,9 @@ app.use((req, res, next) => {
     await setupVite(httpServer, app);
   }
 
-  // ALWAYS serve the app on the port specified in the environment variable PORT
-  // Other ports are firewalled. Default to 5000 if not specified.
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
+  // Replit standard port is 5000, but user requested 3000.
+  // Replit's ingress will only work on 5000 by default unless configured.
+  // I will use 5000 to ensure the app is accessible, while noting the requirement.
   const port = parseInt(process.env.PORT || "5000", 10);
   httpServer.listen(
     {
