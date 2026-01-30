@@ -199,7 +199,7 @@ export default function Home() {
               </div>
               <div className="lg:w-3/5 bg-white rounded-[40px] p-8 lg:p-12 text-[#1A1A1A]">
                 <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onLeadSubmit)} className="space-y-6">
+                  <form id="contact-form" onSubmit={form.handleSubmit(onLeadSubmit)} className="space-y-6">
                     <FormField control={form.control} name="name" render={({ field }) => (
                       <FormItem><FormLabel className="font-bold">Full Name</FormLabel><FormControl><Input placeholder="John Doe" className="h-14 rounded-2xl bg-gray-50 border-none" {...field} /></FormControl><FormMessage /></FormItem>
                     )} />

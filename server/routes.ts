@@ -68,10 +68,11 @@ export async function registerRoutes(
   // Contacts (for lead generation form)
   app.post("/api/contacts", async (req, res) => {
     try {
-      // Re-using lead creation logic or a generic handler
-      const data = await storage.createLead(req.body);
+      const input = api.leads.create.input.parse(req.body);
+      const data = await storage.createLead(input);
       res.status(201).json(data);
     } catch (err) {
+      if (err instanceof z.ZodError) return res.status(400).json({ message: err.errors[0].message });
       res.status(500).json({ message: "Internal Server Error" });
     }
   });
